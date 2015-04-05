@@ -1,0 +1,158 @@
+##load from csv
+LOAD DATA LOCAL INFILE '/home/jinyi/Serendipity/data/tianchi_mobile_recommend_train_item.csv'
+ INTO TABLE item
+ CHARACTER SET utf8
+ FIELDS TERMINATED BY ',' ENCLOSED BY '"';
+
+LOAD DATA LOCAL INFILE '/home/jinyi/Serendipity/data/tianchi_mobile_recommend_train_user.csv'
+ INTO TABLE user
+ CHARACTER SET utf8
+ FIELDS TERMINATED BY ',' ENCLOSED BY '"';
+
+LOAD DATA LOCAL INFILE '/home/jinyi/Serendipity/data/tmp.csv'
+ INTO TABLE usertry
+ CHARACTER SET utf8
+ FIELDS TERMINATED BY ',' ENCLOSED BY '"';
+
+##create table
+create table item(
+    item_id int(10) not null,
+    item_geohash varchar(20),
+    item_category int(10) not null
+    );
+
+create table user(
+	user_id int(10) not null,
+	item_id int(10) not null,
+	behavior_type int(1) not null,
+	user_geohash varchar(20),
+	item_category int(10) not null,
+	time datetime not null 
+	);
+
+create table usertry(
+	user_id int(10) not null,
+	item_id int(10) not null,
+	behavior_type int(1) not null,
+	user_geohash varchar(20),
+	item_category int(10) not null,
+	time datetime not null 
+	);
+
+    primary key ( item_id ) 
+
+#check primary key constraints
+user_id,item_id,behavior_type,user_geohash,item_category,time
+
+select count(*) from(
+select * from user
+group by user_id,item_id,behavior_type,user_geohash,item_category,time) as tmpuser;
+
+item_id, item_geohash, item_category
+
+select count(*) from(
+select * from item
+group by item_id, item_geohash) as tmpitem;
+
+#add primary key
+ALTER TABLE item ADD CONSTRAINT pk_item PRIMARY KEY (item_id, item_geohash);       
+
+ALTER TABLE user ADD i int(10) not null primary key auto_increment;
+
+#log in mysql
+mysql -uroot -p --local-infile
+
+#add index
+ALTER TABLE user ADD INDEX covering_index (c3,c2);  
+
+create index in_user on user (behavior_type) ;
+
+create index in_time on user (time) ;
+
+create index in_item on item (item_category) ;
+
+create index in_ic on item (item_id, item_category) ;
+
+#show index
+show index from table;
+
+SELECT * FROM [TABLE]
+INTO OUTFILE '[FILE]'；
+或者
+SELECT * FROM [TABLE]
+INTO OUTFILE '[FILE]'
+FIELDS TERMINATED BY ',' 
+OPTIONALLY ENCLOSED BY '"' 
+LINES TERMINATED BY '\n';
+
+SELECT * FROM item
+INTO OUTFILE '/tmp/item_sql_2.csv'
+FIELDS TERMINATED BY ',' 
+LINES TERMINATED BY '\n';
+
+SELECT user_id,item_id,behavior_type,user_geohash,item_category,time FROM user
+INTO OUTFILE '/tmp/user_sql_2.csv'
+FIELDS TERMINATED BY ',' 
+LINES TERMINATED BY '\n';
+
+select * from item as t1, item as t2
+where t1.item_id = t2.item_id
+and t1.item_category != t2.item_category;
+
+select count(*) from user where behavior_type=4;
+
+select count(*) from(
+select user_id, item_id
+from user, item
+where time>"2014-12-17 23:10:00"
+and time<"2014-12-18 23:10:00"
+and user.item_id = item.id
+group by user_id, item_id) as tmp;
+
+select count(*) from(
+select user_id, item_id
+from user
+where behavior_type= 4 and time>"2014-12-17 23:00:00"
+group by user_id, item_id) as tmp;
+
+select count(*) from(
+select user.user_id, user.item_id
+from user, item
+where user.item_id = item.id
+and user.behavior_type = 4
+group by user.user_id, user.item_id) as tmp;
+
+13641
+
+select count(distinct user_id) from(
+select user_id from user, item
+where user.item_id = item.id
+) as tmp;
+
+select count(distinct user_id) from(
+select user_id, item_id
+from user, item
+where time<"2014-12-17 23:10:00"
+and time>"2014-11-16 23:10:00"
+and user.item_id = item.id
+and user.behavior_type=4
+group by user_id, item_id) as tmp;
+
+select count(*)
+from user
+where time<"2014-12-17 23:10:00"
+and time>"2014-11-16 23:10:00";
+
+select count(*)
+from user
+where time>"2014-12-17 23:10:00";
+
+select count(user_id) from(
+select *
+from user, item
+where time<"2014-12-18 23:10:00"
+and time>"2014-12-17 23:10:00"
+and user.item_id = item.id
+and user.behavior_type=3
+group by user_id, item_id
+) as tmp;
