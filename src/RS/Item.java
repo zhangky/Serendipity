@@ -3,7 +3,7 @@ package RS;
 import java.util.ArrayList;
 import java.util.HashSet;
 
-class Item{
+public class Item{
 	private int itemId;
 	private String itemGeohash;
 	private int itemCategory;

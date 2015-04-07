@@ -1,4 +1,3 @@
-package playfulzlc;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -486,12 +485,12 @@ public class firstRec{
 	static int startTrain, endTrain, endTest;
 	static int features[] = {1,3,4,6,12};
 	
-//	static final String commonPath = "C:/Users/k/Desktop/ÌìÃ¨Ëã·¨±ÈÈü/";
+//	static final String commonPath = "C:/Users/k/Desktop/ï¿½ï¿½Ã¨ï¿½ã·¨ï¿½ï¿½ï¿½ï¿½/";
 	static final String commonPath = "/home/keyang/RS/";
-	static final String recordsPath=commonPath+"Êý¾Ý/processed.txt";
-	static final String resultPath=commonPath+"½á¹û/result.txt";
-	static final String brandsPath=commonPath+"Êý¾Ý/brands.txt";
-	static final String trainPath=commonPath+"Êý¾Ý/resample-feature/4/train3.arff";
+	static final String recordsPath=commonPath+"ï¿½ï¿½ï¿½/processed.txt";
+	static final String resultPath=commonPath+"ï¿½ï¿½ï¿½/result.txt";
+	static final String brandsPath=commonPath+"ï¿½ï¿½ï¿½/brands.txt";
+	static final String trainPath=commonPath+"ï¿½ï¿½ï¿½/resample-feature/4/train3.arff";
 	static final String modelPath=commonPath+"model/2.model";
 	static final String modelsPath=commonPath+"models/";
 	static ArrayList<Record> records = new ArrayList<Record>();

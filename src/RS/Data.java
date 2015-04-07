@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 
+import DB.MySQL;
+
 public class Data {
 	private ArrayList<Record> records;
 	private HashSet<Item> subItems;
@@ -97,6 +99,7 @@ public class Data {
 					users.get(record.getUserId()).getTrainRecords().add(record);
 				} else {
 					User newUser = new User();
+					newUser.setUserID(record.getUserId());
 					newUser.getTrainRecords().add(record);
 					users.put(record.getUserId(), newUser);
 				}
@@ -116,6 +119,10 @@ public class Data {
 			}
 		}
 
+		for (User user:users.values()){
+			user.updateItemsID();
+		}
+		
 		System.out.println("i " + i + "\nrecords size "
 				+ records.size() + "\ntotal users " + users.size());
 //		System.out.println("tmp1 "+tmp1+" tmp2 "+tmp2);
