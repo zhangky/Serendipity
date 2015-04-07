@@ -15,6 +15,7 @@ public class Data {
 	private HashSet<Item> subItems;
 	private HashMap<Integer, User> users;
 	private HashSet<Integer> subItemsID;
+	private MySQL mysql;
 
 	public void init() throws Exception {
 		// mysql load in version, User and Item class provide sql query
@@ -28,7 +29,7 @@ public class Data {
 	}
 	
 	public void initUsingSQL() throws Exception{
-		
+		mysql = new MySQL();
 	}
 
 	public void initUsingFile() throws Exception {

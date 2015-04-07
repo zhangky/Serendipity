@@ -30,27 +30,29 @@ public class User {
 //				this.recItems.add(record.getItemId());
 //			}
 //		}
-		HashSet<Integer> boughtItem = new HashSet<Integer>();
-		for (Record record : this.trainRecords) {
-			if (record.getTime().after(new Time(Info.END_TRAIN.getTime()-(long)preHours*3600*1000))
-					&& subItemsID.contains(record.getItemId())
-					&& record.getBehaviorType()==Info.BUY
-					) {
+		
+//		HashSet<Integer> boughtItem = new HashSet<Integer>();
+//		HashMap<Integer, Boolean> can = new HashMap<Integer, Boolean>();
+//		for (Record record : this.trainRecords) {
+//			if (record.getTime().after(new Time(Info.END_TRAIN.getTime()-(long)preHours*3600*1000))
+//					&& subItemsID.contains(record.getItemId())
+//					&& record.getBehaviorType()==Info.BUY
+//					) {
+////				this.recItems.add(record.getItemId());
+//				boughtItem.add(record.getItemId());
+//			}
+//		}
+//		
+//		for (Record record : this.trainRecords) {
+//			if (record.getTime().after(new Time(Info.END_TRAIN.getTime()-(long)preHours*3600*1000))
+//					&& subItemsID.contains(record.getItemId())
+//					&& (record.getBehaviorType()==Info.CART
+//					|| record.getBehaviorType()==Info.COLLECT)
+//					&& !boughtItem.contains(record.getItemId())
+//					) {
 //				this.recItems.add(record.getItemId());
-				boughtItem.add(record.getItemId());
-			}
-		}
-		
-		for (Record record : this.trainRecords) {
-			if (record.getTime().after(new Time(Info.END_TRAIN.getTime()-(long)preHours*3600*1000))
-					&& subItemsID.contains(record.getItemId())
-					&& record.getBehaviorType()==Info.CART
-					&& !boughtItem.contains(record.getItemId())
-					) {
-				this.recItems.add(record.getItemId());
-			}
-		}
-		
+//			}
+//		}
 		
 	}
 
